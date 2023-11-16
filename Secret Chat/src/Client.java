@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client {
@@ -82,12 +83,19 @@ public class Client {
             e.printStackTrace();
         }
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws UnknownHostException, IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("enter username: ");
         String username = scanner.nextLine();
-        
+        //connect to port server is listening on
+        Socket socket = new Socket("localhost", 5000);
+        Client client = new Client(socket, username);
+        //separate threads for listen and send 
+        //allows app to run at the same time so that it does not halt when waiting to listen/send
+        client.listenMessage();
+        client.sendMessage();
     }
+
 }
 
 
