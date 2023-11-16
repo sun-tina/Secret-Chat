@@ -44,14 +44,9 @@ public class Server{
    }
 
     //main
-    public static void main (String[] args){
+    public static void main (String[] args) throws IOException{
         //server to listen on port number
-        ServerSocket serverSocket;
-        try {
-            serverSocket = new ServerSocket(5000);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ServerSocket serverSocket = new ServerSocket(5000);
         Server server = new Server(serverSocket);
         //run server / keep it constantly running
         server.startServer();

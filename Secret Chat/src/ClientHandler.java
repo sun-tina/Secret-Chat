@@ -28,7 +28,7 @@ public class ClientHandler implements Runnable{
             this.clientUserName = bufferedReader.readLine();
             //passes client username to arraylist of users
             clientHandlers.add(this);
-            broadcastMessage("SERVER: " + clientUserName + "has joined");
+            broadcastMessage("SERVER: " + clientUserName + " has joined");
 
 
             
@@ -77,7 +77,7 @@ public class ClientHandler implements Runnable{
     public void removeClientHandler(){
         //removes current client from array list 
         clientHandlers.remove(this);
-        broadcastMessage("Server: " + clientUserName + "has left");
+        broadcastMessage("Server: " + clientUserName + " has left");
         }
     
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
