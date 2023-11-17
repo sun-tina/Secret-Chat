@@ -1,3 +1,5 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -6,6 +8,9 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 
 public class Client {
     private Socket socket;
@@ -66,7 +71,7 @@ public class Client {
             }
             //to call start on the thread object
         }).start();
-    }
+        }
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         try{
             // check to see if null to avoid null pointer exception
@@ -84,6 +89,8 @@ public class Client {
         }
     }
     public static void main(String[] args) throws UnknownHostException, IOException{
+        Gui gui = new Gui();
+        gui.setVisible(true);
         Scanner scanner = new Scanner(System.in);
         System.out.println("enter username: ");
         String username = scanner.nextLine();
@@ -94,9 +101,9 @@ public class Client {
         //allows app to run at the same time so that it does not halt when waiting to listen/send
         client.listenMessage();
         client.sendMessage();
+
+
     }
-
 }
-
-
+    
 
