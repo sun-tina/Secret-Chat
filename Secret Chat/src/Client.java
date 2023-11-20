@@ -71,6 +71,8 @@ public class Client {
             }
             //to call start on the thread object
         }).start();
+
+        //send button action
         }
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         try{

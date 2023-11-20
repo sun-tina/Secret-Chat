@@ -22,7 +22,7 @@ public class Gui extends JFrame{
         chatArea = new JTextArea();
         chatArea.setEditable(false);
         
-        //to type messages
+        //type messages
         messageField = new JTextField();
 
         JButton sendButton = new JButton("send");
