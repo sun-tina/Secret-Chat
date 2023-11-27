@@ -10,6 +10,9 @@ public class Server extends javax.swing.JFrame{
     public Server(ServerSocket serverSocket){
         Server.serverSocket = serverSocket;
     }
+    public Server() {
+        initComponents();
+    }
     @SuppressWarnings("unchecked")                          
     private void initComponents() {
 
@@ -93,7 +96,7 @@ public class Server extends javax.swing.JFrame{
     public static void main (String[] args) throws IOException{
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run(){
-                new Server(serverSocket).setVisible(true);
+                new Server().setVisible(true);
             }
         });
         //server to listen on port number
