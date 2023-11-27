@@ -1,13 +1,6 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
 public class Gui extends JFrame{
    
     private final JTextArea chatArea;
@@ -65,8 +58,11 @@ public class Gui extends JFrame{
     }
 
     public static void main (String[] args){
-        Gui gui = new Gui();
-        gui.setVisible(true);
+        SwingUtilities.invokeLater(()->{
+            Gui gui = new Gui();
+            gui.setVisible(true);
+        });
+        
     }
 
 }

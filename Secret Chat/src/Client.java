@@ -1,5 +1,3 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,10 +7,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 
-public class Client {
+public class Client extends javax.swing.JFrame{
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
@@ -72,7 +68,6 @@ public class Client {
             //to call start on the thread object
         }).start();
 
-        //send button action
         }
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
         try{
@@ -91,8 +86,15 @@ public class Client {
         }
     }
     public static void main(String[] args) throws UnknownHostException, IOException{
-        Gui gui = new Gui();
-        gui.setVisible(true);
+        // Gui gui = new Gui();
+        // gui.setVisible(true);
+        // //send button action
+        // gui.setSendActionListener(e -> {
+        //     String message = gui.getMessage();
+        //     if(!message.isEmpty()){
+        //         gui.clearMessage();
+        //     }
+        // });
         Scanner scanner = new Scanner(System.in);
         System.out.println("enter username: ");
         String username = scanner.nextLine();
