@@ -62,12 +62,12 @@ public class ClientHandler implements Runnable{
         for (ClientHandler clientHandler : clientHandlers){
             try{
                 //check to see if sent message is from same username to avoid sending message back to original sender
-                if(!clientHandler.clientUserName.equals(clientUserName)){
+                // if(!clientHandler.clientUserName.equals(clientUserName)){
                     clientHandler.bufferedWriter.write(messagetoSend);
                     clientHandler.bufferedWriter.newLine();
                     //manually flushing - prevents app from waiting until buffer is full
                     clientHandler.bufferedWriter.flush();
-                }
+                // }
             }catch(IOException e){
                 closeAll(socket, bufferedReader, bufferedWriter);
             }
