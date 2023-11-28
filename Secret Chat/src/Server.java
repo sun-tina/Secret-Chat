@@ -33,6 +33,8 @@ public class Server extends javax.swing.JFrame{
 
         messageArea.setColumns(20);
         messageArea.setRows(5);
+        //read only
+        messageArea.setEditable(false);
         jScrollPane2.setViewportView(messageArea);
 
         jLabel1.setText("Server");
