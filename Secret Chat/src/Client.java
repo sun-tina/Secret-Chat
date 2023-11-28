@@ -124,6 +124,7 @@ public class Client extends javax.swing.JFrame{
                 while (socket.isConnected()){
                     try{
                         groupMessage = bufferedReader.readLine();
+                        readMessageArea.setText(readMessageArea.getText() + "\n" + groupMessage);
                         System.out.println(groupMessage);
 
                     }catch(IOException e){
@@ -182,7 +183,7 @@ public class Client extends javax.swing.JFrame{
 
     }
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea readMessageArea;
+    private static javax.swing.JTextArea readMessageArea;
     private javax.swing.JButton send;
     private javax.swing.JLabel title;
     private javax.swing.JTextArea typeMessageArea;
