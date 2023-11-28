@@ -24,7 +24,7 @@ public class Client extends javax.swing.JFrame{
         readMessageArea = new javax.swing.JTextArea();
         send = new javax.swing.JButton();
         title = new javax.swing.JLabel();
-        typeMessageField = new javax.swing.JTextField();
+        typeMessageArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,7 +41,7 @@ public class Client extends javax.swing.JFrame{
 
         title.setText("Chat");
 
-        typeMessageField.setText("jTextField1");
+        typeMessageArea.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -51,7 +51,7 @@ public class Client extends javax.swing.JFrame{
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(typeMessageField, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(typeMessageArea, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(send, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(title)
@@ -68,7 +68,7 @@ public class Client extends javax.swing.JFrame{
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(send, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(typeMessageField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(typeMessageArea, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -93,9 +93,6 @@ public class Client extends javax.swing.JFrame{
         // pass
     }
 
-    private void typeMessageFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // pass
-    }
     public void sendMessage(){
         try{
             bufferedWriter.write(username);
@@ -187,7 +184,7 @@ public class Client extends javax.swing.JFrame{
     private javax.swing.JTextArea readMessageArea;
     private javax.swing.JButton send;
     private javax.swing.JLabel title;
-    private javax.swing.JTextField typeMessageField;
+    private javax.swing.JTextArea typeMessageArea;
 }
     
 
