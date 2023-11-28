@@ -30,6 +30,7 @@ public class Client extends javax.swing.JFrame{
 
         readMessageArea.setColumns(20);
         readMessageArea.setRows(5);
+        readMessageArea.setEditable(false);
         jScrollPane1.setViewportView(readMessageArea);
 
         send.setText("send");
@@ -41,7 +42,7 @@ public class Client extends javax.swing.JFrame{
 
         title.setText("Chat");
 
-        typeMessageArea.setText("jTextField1");
+        typeMessageArea.setText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

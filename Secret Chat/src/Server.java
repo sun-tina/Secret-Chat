@@ -69,7 +69,6 @@ public class Server extends javax.swing.JFrame{
                 //halts here until client connects and socket object is returned
                 Socket socket = serverSocket.accept();
                 System.out.println("new client connected");
-                // messageArea.setText("new client connected");
                 //handles client communication
                 ClientHandler ClientHandler = new ClientHandler(socket);
                 messageArea.setText(messageArea.getText() + "\nnew client connected");
