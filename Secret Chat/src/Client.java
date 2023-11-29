@@ -6,6 +6,12 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 
 public class Client extends javax.swing.JFrame{
@@ -124,7 +130,24 @@ public class Client extends javax.swing.JFrame{
                 while (socket.isConnected()){
                     try{
                         groupMessage = bufferedReader.readLine();
-                        readMessageArea.setText(readMessageArea.getText() + "\n" + groupMessage);
+                        addTimedMessage(readMessageArea, groupMessage, 3000);
+                        // readMessageArea.setText(readMessageArea.getText() + "\n" + groupMessage);
+                        // int delay = 1000; //milliseconds
+                        // ActionListener taskPerformer = new ActionListener() {
+                        //     public void actionPerformed(ActionEvent evt) {
+                        //         //...Perform a task...
+                        //     }
+                        // };
+                        // new Timer(delay, taskPerformer).start();
+                        // Timer timer = new Timer(delay, new ActionListener(){
+
+                        //     @Override
+                        //     public void actionPerformed(ActionEvent e) {
+                        //         // TODO Auto-generated method stub
+                        //         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+                        //     }
+
+                        // });
                         System.out.println(groupMessage);
 
                     }catch(IOException e){
@@ -154,16 +177,35 @@ public class Client extends javax.swing.JFrame{
             e.printStackTrace();
         }
     }
+
+    public void addTimedMessage(JTextArea readMessageArea, String message, int delay){
+        SwingUtilities.invokeLater(()->{
+            readMessageArea.setText(readMessageArea.getText() + "\n" + message);
+
+            Timer timer = new Timer(delay, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    removeMessage(readMessageArea, message);
+                }
+            });
+            timer.setRepeats(false);
+            timer.start();
+        });
+    }
+    
+    public void removeMessage(JTextArea readMessageArea, String message){
+        SwingUtilities.invokeLater(()->{
+            String currentText = readMessageArea.getText();
+            int startIndex = currentText.indexOf(message);
+            if(startIndex != -1){
+                int endIndex = startIndex + message.length();
+                readMessageArea.setText(currentText.substring(0, startIndex) + currentText.substring(endIndex));
+            }
+        });
+        
+    }
+
     public static void main(String[] args) throws UnknownHostException, IOException{
-        // Gui gui = new Gui();
-        // gui.setVisible(true);
-        // //send button action
-        // gui.setSendActionListener(e -> {
-        //     String message = gui.getMessage();
-        //     if(!message.isEmpty()){
-        //         gui.clearMessage();
-        //     }
-        // });
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Client().setVisible(true);
@@ -188,5 +230,3 @@ public class Client extends javax.swing.JFrame{
     private javax.swing.JLabel title;
     private javax.swing.JTextArea typeMessageArea;
 }
-    
-
