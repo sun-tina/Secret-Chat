@@ -130,24 +130,7 @@ public class Client extends javax.swing.JFrame{
                 while (socket.isConnected()){
                     try{
                         groupMessage = bufferedReader.readLine();
-                        addTimedMessage(readMessageArea, groupMessage, 3000);
-                        // readMessageArea.setText(readMessageArea.getText() + "\n" + groupMessage);
-                        // int delay = 1000; //milliseconds
-                        // ActionListener taskPerformer = new ActionListener() {
-                        //     public void actionPerformed(ActionEvent evt) {
-                        //         //...Perform a task...
-                        //     }
-                        // };
-                        // new Timer(delay, taskPerformer).start();
-                        // Timer timer = new Timer(delay, new ActionListener(){
-
-                        //     @Override
-                        //     public void actionPerformed(ActionEvent e) {
-                        //         // TODO Auto-generated method stub
-                        //         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-                        //     }
-
-                        // });
+                        addTimedMessage(readMessageArea, groupMessage, 3000); 
                         System.out.println(groupMessage);
 
                     }catch(IOException e){
