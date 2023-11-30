@@ -10,8 +10,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -33,22 +36,9 @@ public class Client extends javax.swing.JFrame{
         send = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         typeMessageArea = new javax.swing.JTextArea();
-        // userLogOn = new UserLogOn(this, true);
-        // userLogOn.setVisible
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        // showSignIn();
-        // JButton signInButton = new JButton("Sign In");
-        // signInButton.addActionListener(new ActionListener() {
-        //     @Override
-        //     public void actionPerformed(ActionEvent e){
-        //         // showSignIn();
-        //     }
-        // });
-
-        // JPanel panel = new JPanel(new GridLayout(2,1));
-        // panel.add(signInButton);
         
 
         readMessageArea.setColumns(20);
@@ -115,20 +105,11 @@ public class Client extends javax.swing.JFrame{
     }
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        // try{
             sendMessage();
-        //     // String message = "";
-        //     // message = typeMessageArea.getText();
-        //     // readMessageArea.setText(readMessageArea.getText() +username+ "\n" + message);
-        //     // typeMessageArea.setText("");
-        // }catch(Exception e){
-        //     e.printStackTrace();
-        // }
     }
 
     public void sendMessage(){
         try{
-            String username = typeMessageArea.getText();
             bufferedWriter.write(username);
             bufferedWriter.newLine();
             bufferedWriter.flush();
@@ -137,7 +118,7 @@ public class Client extends javax.swing.JFrame{
             while(socket.isConnected()){
                 String message = scanner.nextLine();
                 bufferedWriter.write(" " + username + ": " + message);
-                System.out.println(username);
+                // System.out.println(username);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
                 typeMessageArea.setText("");
@@ -225,11 +206,8 @@ public class Client extends javax.swing.JFrame{
                 new Client().setVisible(true);
             }
         });
-        // Scanner scanner = new Scanner(System.in);
-        // System.out.println("enter username: ");
-        // readMessageArea.setText(readMessageArea.getText() + "\n" + "enter username :");
-        // String username = scanner.nextLine();
-        // String username = readMessageArea.getText();
+        String username =  JOptionPane.showInputDialog(readMessageArea, "Enter username");
+        readMessageArea.setText(readMessageArea.getText() + "[Current User] " + username);
         // ip address(local host) & port server is listening on
         Socket socket = new Socket("127.0.0.1", 5000);
         Client client = new Client(socket, username);
