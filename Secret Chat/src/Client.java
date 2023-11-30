@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -110,19 +111,20 @@ public class Client extends javax.swing.JFrame{
 
     public void sendMessage(){
         try{
-            bufferedWriter.write(username);
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-           
+            // bufferedWriter.write(username);
+            // bufferedWriter.newLine();
+            // bufferedWriter.flush();
+            
             Scanner scanner = new Scanner(typeMessageArea.getText());
-            while(socket.isConnected()){
+            if (scanner.hasNext()){
+                while(socket.isConnected()){
                 String message = scanner.nextLine();
-                bufferedWriter.write(" " + username + ": " + message);
+                bufferedWriter.write(" "  + username + ": " + message);
                 // System.out.println(username);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
                 typeMessageArea.setText("");
-            }
+            }};
         
             
         }catch(IOException e){
@@ -207,13 +209,19 @@ public class Client extends javax.swing.JFrame{
             }
         });
         String username =  JOptionPane.showInputDialog(readMessageArea, "Enter username");
-        readMessageArea.setText(readMessageArea.getText() + "[Current User] " + username);
+       
+        // readMessageArea.setText(readMessageArea.getText() + "[Current User] " + username);
         // ip address(local host) & port server is listening on
-        Socket socket = new Socket("127.0.0.1", 5000);
+        if(username !=null)
+       { Socket socket = new Socket("127.0.0.1", 5000);
         Client client = new Client(socket, username);
         //separate threads for listen and send 
         //allows app to run at the same time so that it does not halt when waiting to listen/send
-        client.listenMessage();
+        client.listenMessage();};
+        
+        bufferedWriter.write(username);
+        bufferedWriter.newLine();
+        bufferedWriter.flush();
         // client.sendMessage();
 
 
