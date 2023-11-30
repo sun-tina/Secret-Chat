@@ -8,9 +8,9 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,7 +37,8 @@ public class Client extends javax.swing.JFrame{
         send = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         typeMessageArea = new javax.swing.JTextArea();
-
+        textColorButton = new javax.swing.JButton();
+        toolBar = new javax.swing.JToolBar();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         
@@ -55,6 +56,17 @@ public class Client extends javax.swing.JFrame{
             }
         });
 
+        textColorButton.setText("Change Text Color");
+        textColorButton.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textColorButtonActionPerformed(evt);
+            }
+        });
+
+        toolBar.add(textColorButton);
+        add(toolBar,BorderLayout.NORTH);
+        toolBar.setVisible(true);
+
         title.setText("Chat");
 
         typeMessageArea.setText("");
@@ -70,6 +82,7 @@ public class Client extends javax.swing.JFrame{
                         .addComponent(typeMessageArea, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(send, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(toolBar)
                     .addComponent(title)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -78,6 +91,7 @@ public class Client extends javax.swing.JFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
+                .addComponent(toolBar)
                 .addComponent(title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -105,16 +119,21 @@ public class Client extends javax.swing.JFrame{
 
     }
 
+    private void textColorButtonActionPerformed(java.awt.event.ActionEvent evt) {                                     
+            changeFontColor();
+    }
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {                                     
             sendMessage();
     }
 
+    public void changeFontColor(){
+        Color newColor = JColorChooser.showDialog(this, "Choose Font Color", readMessageArea.getForeground());
+        if (newColor != null){
+            readMessageArea.setForeground(newColor);
+        }
+    }
     public void sendMessage(){
         try{
-            // bufferedWriter.write(username);
-            // bufferedWriter.newLine();
-            // bufferedWriter.flush();
-            
             Scanner scanner = new Scanner(typeMessageArea.getText());
             if (scanner.hasNext()){
                 while(socket.isConnected()){
@@ -210,20 +229,18 @@ public class Client extends javax.swing.JFrame{
         });
         String username =  JOptionPane.showInputDialog(readMessageArea, "Enter username");
        
-        // readMessageArea.setText(readMessageArea.getText() + "[Current User] " + username);
         // ip address(local host) & port server is listening on
-        if(username !=null)
-       { Socket socket = new Socket("127.0.0.1", 5000);
+        if(username !=null){ 
+        Socket socket = new Socket("127.0.0.1", 5000);
         Client client = new Client(socket, username);
         //separate threads for listen and send 
         //allows app to run at the same time so that it does not halt when waiting to listen/send
-        client.listenMessage();};
-        
+        client.listenMessage();
+        }
+
         bufferedWriter.write(username);
         bufferedWriter.newLine();
         bufferedWriter.flush();
-        // client.sendMessage();
-
 
     }
     private javax.swing.JScrollPane jScrollPane1;
@@ -231,4 +248,6 @@ public class Client extends javax.swing.JFrame{
     private javax.swing.JButton send;
     private javax.swing.JLabel title;
     private static javax.swing.JTextArea typeMessageArea;
+    private javax.swing.JButton textColorButton;
+    private javax.swing.JToolBar toolBar;
 }
