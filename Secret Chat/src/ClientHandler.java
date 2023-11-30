@@ -28,7 +28,7 @@ public class ClientHandler implements Runnable {
             this.clientUserName = bufferedReader.readLine();
             // passes client username to arraylist of users
             clientHandlers.add(this);
-            broadcastMessage("SERVER: " + clientUserName + " has joined");
+            broadcastMessage(" SERVER: " + clientUserName + " has joined");
 
         } catch (IOException e) {
             closeAll(socket, bufferedReader, bufferedWriter);

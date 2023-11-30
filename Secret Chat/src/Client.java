@@ -9,6 +9,8 @@ import java.util.Scanner;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -31,11 +33,27 @@ public class Client extends javax.swing.JFrame{
         send = new javax.swing.JButton();
         title = new javax.swing.JLabel();
         typeMessageArea = new javax.swing.JTextArea();
+        // userLogOn = new UserLogOn(this, true);
+        // userLogOn.setVisible
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        // showSignIn();
+        // JButton signInButton = new JButton("Sign In");
+        // signInButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e){
+        //         // showSignIn();
+        //     }
+        // });
+
+        // JPanel panel = new JPanel(new GridLayout(2,1));
+        // panel.add(signInButton);
+        
+
         readMessageArea.setColumns(20);
         readMessageArea.setRows(5);
+        readMessageArea.setFont(new Font("Arial", Font.PLAIN, 17));
         readMessageArea.setEditable(false);
         jScrollPane1.setViewportView(readMessageArea);
 
@@ -81,7 +99,7 @@ public class Client extends javax.swing.JFrame{
 
         pack();
     }                  
-
+    
 
     public Client(Socket socket, String username){
         try{
@@ -97,22 +115,35 @@ public class Client extends javax.swing.JFrame{
     }
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {                                     
-        // pass
+        // try{
+            sendMessage();
+        //     // String message = "";
+        //     // message = typeMessageArea.getText();
+        //     // readMessageArea.setText(readMessageArea.getText() +username+ "\n" + message);
+        //     // typeMessageArea.setText("");
+        // }catch(Exception e){
+        //     e.printStackTrace();
+        // }
     }
 
     public void sendMessage(){
         try{
+            String username = typeMessageArea.getText();
             bufferedWriter.write(username);
             bufferedWriter.newLine();
             bufferedWriter.flush();
-
-            Scanner scanner = new Scanner(System.in);
+           
+            Scanner scanner = new Scanner(typeMessageArea.getText());
             while(socket.isConnected()){
                 String message = scanner.nextLine();
-                bufferedWriter.write(username + ": " + message);
+                bufferedWriter.write(" " + username + ": " + message);
+                System.out.println(username);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
+                typeMessageArea.setText("");
             }
+        
+            
         }catch(IOException e){
             closeAll(socket, bufferedReader, bufferedWriter);
         }
@@ -130,7 +161,7 @@ public class Client extends javax.swing.JFrame{
                 while (socket.isConnected()){
                     try{
                         groupMessage = bufferedReader.readLine();
-                        addTimedMessage(readMessageArea, groupMessage, 3000); 
+                        addTimedMessage(readMessageArea, groupMessage, 50000); 
                         System.out.println(groupMessage);
 
                     }catch(IOException e){
@@ -194,16 +225,18 @@ public class Client extends javax.swing.JFrame{
                 new Client().setVisible(true);
             }
         });
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("enter username: ");
-        String username = scanner.nextLine();
+        // Scanner scanner = new Scanner(System.in);
+        // System.out.println("enter username: ");
+        // readMessageArea.setText(readMessageArea.getText() + "\n" + "enter username :");
+        // String username = scanner.nextLine();
+        // String username = readMessageArea.getText();
         // ip address(local host) & port server is listening on
         Socket socket = new Socket("127.0.0.1", 5000);
         Client client = new Client(socket, username);
         //separate threads for listen and send 
         //allows app to run at the same time so that it does not halt when waiting to listen/send
         client.listenMessage();
-        client.sendMessage();
+        // client.sendMessage();
 
 
     }
@@ -211,5 +244,5 @@ public class Client extends javax.swing.JFrame{
     private static javax.swing.JTextArea readMessageArea;
     private javax.swing.JButton send;
     private javax.swing.JLabel title;
-    private javax.swing.JTextArea typeMessageArea;
+    private static javax.swing.JTextArea typeMessageArea;
 }
