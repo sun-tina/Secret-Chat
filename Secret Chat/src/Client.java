@@ -38,7 +38,9 @@ public class Client extends javax.swing.JFrame{
         title = new javax.swing.JLabel();
         typeMessageArea = new javax.swing.JTextArea();
         textColorButton = new javax.swing.JButton();
-        toolBar = new javax.swing.JToolBar();
+        boxColorButton = new javax.swing.JButton();
+        // toolBar = new javax.swing.JToolBar();
+        menu = new javax.swing.JMenuBar();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         
@@ -56,16 +58,33 @@ public class Client extends javax.swing.JFrame{
             }
         });
 
-        textColorButton.setText("Change Text Color");
+        textColorButton.setText("Text Color");
         textColorButton.addActionListener(new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textColorButtonActionPerformed(evt);
             }
         });
 
-        toolBar.add(textColorButton);
-        add(toolBar,BorderLayout.NORTH);
-        toolBar.setVisible(true);
+        boxColorButton.setText("Chat Color");
+        boxColorButton.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxColorButtonActionPerformed(evt);
+            }
+        });
+        
+        // toolBar.add(textColorButton);
+        // toolBar.add(boxColorButton);
+        // add(toolBar,BorderLayout.NORTH);
+        // // toolBar.BorderLayout.EAST;
+        // toolBar.setVisible(true);
+
+       
+        menu.add(boxColorButton);
+        menu.add(textColorButton);
+        // add(menu,BorderLayout.EAST);
+        setJMenuBar(menu);
+        // toolBar.BorderLayout.EAST;
+        menu.setVisible(true);
 
         title.setText("Chat");
 
@@ -82,8 +101,9 @@ public class Client extends javax.swing.JFrame{
                         .addComponent(typeMessageArea, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(send, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(toolBar)
+                    // .addComponent(toolBar)
                     .addComponent(title)
+                    
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -91,7 +111,8 @@ public class Client extends javax.swing.JFrame{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(toolBar)
+                // .addComponent(toolBar)
+                // .addComponent(menu)
                 .addComponent(title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,7 +139,9 @@ public class Client extends javax.swing.JFrame{
         }
 
     }
-
+    private void boxColorButtonActionPerformed(java.awt.event.ActionEvent evt) {                                     
+            changeBoxColor();
+    }
     private void textColorButtonActionPerformed(java.awt.event.ActionEvent evt) {                                     
             changeFontColor();
     }
@@ -130,6 +153,14 @@ public class Client extends javax.swing.JFrame{
         Color newColor = JColorChooser.showDialog(this, "Choose Font Color", readMessageArea.getForeground());
         if (newColor != null){
             readMessageArea.setForeground(newColor);
+            typeMessageArea.setForeground(newColor);
+        }
+    }
+    public void changeBoxColor(){
+        Color newColor = JColorChooser.showDialog(this, "Choose Font Color", readMessageArea.getForeground());
+        if (newColor != null){
+            readMessageArea.setBackground(newColor);
+            typeMessageArea.setBackground(newColor);
         }
     }
     public void sendMessage(){
@@ -250,4 +281,8 @@ public class Client extends javax.swing.JFrame{
     private static javax.swing.JTextArea typeMessageArea;
     private javax.swing.JButton textColorButton;
     private javax.swing.JToolBar toolBar;
+    private javax.swing.JButton boxColorButton;
+    private javax.swing.JPanel topright;
+    private javax.swing.JMenuBar menu;
+
 }

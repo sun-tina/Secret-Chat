@@ -73,8 +73,14 @@ public class ClientHandler implements Runnable {
 
     public void removeClientHandler() {
         // removes current client from array list
-        clientHandlers.remove(this);
-        // broadcastMessage("SERVER: " + clientUserName + " has left");
+        try {
+            broadcastMessage("SERVER: " + clientUserName + " has left");
+            clientHandlers.remove(this);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+       
+        
     }
 
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
