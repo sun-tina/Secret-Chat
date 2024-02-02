@@ -75,10 +75,9 @@ public class Server extends javax.swing.JFrame{
                 //to spawn new threads relevant to new clients
                 Thread thread = new Thread(ClientHandler);
                 thread.start();
-
             }
         }catch(IOException e){
-
+            
 
         }
     }

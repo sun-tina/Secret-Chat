@@ -9,8 +9,7 @@ import java.util.ArrayList;
 //implements runnable interface & instances excecute via separate thread
 public class ClientHandler implements Runnable {
 
-    // using array to keep track of clients to loop thru and send message to each
-    // want array to belong to class not each object of class - static
+    // using arraylist to keep track of client instances 
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
     private Socket socket;
     // buffered to read and write data/messages
@@ -28,6 +27,7 @@ public class ClientHandler implements Runnable {
             this.clientUserName = bufferedReader.readLine();
             // passes client username to arraylist of users
             clientHandlers.add(this);
+            //notify all clients of new user 
             broadcastMessage(" SERVER: " + clientUserName + " has joined");
 
         } catch (IOException e) {
@@ -50,6 +50,8 @@ public class ClientHandler implements Runnable {
                 broadcastMessage(clientMessage);
 
             } catch (IOException e) {
+                // broadcastMessage("SERVER: " + clientUserName + " has left");
+                removeClientHandler();
                 closeAll(socket, bufferedReader, bufferedWriter);
                 break;
             }
