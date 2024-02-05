@@ -25,5 +25,6 @@ git clone https://github.com/sun-tina/Secret-Chat.git
 
 
 #**To close**: 
+
 Do not close SERVER window BEFORE closing client. 
 Server must be running inorder to support chatters. Close CLIENT chat window of the user you no longer need, then CLOSE SERVER LAST when there are no more client windows open.
